@@ -7,38 +7,51 @@ export async function createTable() {
         )
     })
 }
-export async function selectCarrinhos() {
-    return openDb().then(db => {
-        return db.all(
+export async function selectCarrinhos(req,res) {
+    openDb().then(db => {
+        db.all(
             'SELECT * FROM Carrinhos'
-        ).then(res=>res)
+        ).then(carrinhos=>res.json(carrinhos))
     });
 }
-export async function selectCarrinho(id) {
-    return openDb().then(db => {
-        return db.get(
+export async function selectCarrinho(req,res) {
+    let id = req.body.id;
+    openDb().then(db => {
+        db.get(
             'SELECT * FROM Carrinhos WHERE id=?',[id]
-        ).then(res=>res)
+        ).then(carrinho=>res.json(carrinho))
     });
 }
-export async function insertCarrinho(carrinhos) {
+export async function insertCarrinho(req,res) {
+    let carrinhos = req.body;
     openDb().then(db => {
         db.run(
             'INSERT INTO Carrinhos ( usuario_id, produto_id,status) VALUES (?,?,?)', [carrinhos.usuario_id,carrinhos.produto_id,carrinhos.status]
         )
     });
+    res.json({
+        "statuscode": 200
+    })
 }
-export async function updateCarrinho(carrinhos) {
+export async function updateCarrinho(req,res) {
+    let carrinhos = req.body;
     openDb().then(db => {
         db.run(
             'UPDATE Carrinhos SET usuario_id=?, produto_id=?,status=? WHERE id=?', [carrinhos.usuario_id,carrinhos.produto_id,carrinhos.status,carrinhos.id]
         )
     });
+    res.json({
+        "statuscode": 200
+    })
 }
-export async function deleteCarrinho(id) {
-    return openDb().then(db => {
-        return db.get(
+export async function deleteCarrinho(req,res) {
+    let id = req.body.id;
+    openDb().then(db => {
+        db.get(
             'DELETE FROM Carrinhos WHERE id=?',[id]
         ).then(res=>res)
     });
+    res.json({
+        "statuscode": 200
+    })
 }

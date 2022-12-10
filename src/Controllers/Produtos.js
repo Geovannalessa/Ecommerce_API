@@ -7,7 +7,6 @@ export async function createTable() {
         )
     })
 }
-
 export async function selectProdutos(req, res) {
     openDb().then(db => {
         db.all(
@@ -19,7 +18,7 @@ export async function selectProduto(req, res) {
     let id = req.body.id;
     openDb().then(db => {
         db.get('SELECT * FROM Produtos WHERE id=?', [id])
-            .then(produtos => res.json(produtos))
+            .then(produto => res.json(produto))
     })
 }
 export async function insertProduto(req, res) {
@@ -44,8 +43,6 @@ export async function updateProduto(req, res) {
         "statuscode": 200
     })
 }
-
-
 export async function deleteProduto(req, res) {
     let id = req.body.id;
     openDb().then(db => {
