@@ -20,6 +20,6 @@ routerUsuarios.post('/usuario', insertUsuario);
 routerUsuarios.put('/usuario', updateUsuario);
 //deletar um usuario pelo id (cheque na rota de ver todos os usuarios):
 routerUsuarios.delete('/usuario', deleteUsuario);
-
+// login será onde vai fazer a validação se existe o email e senha e se nao existir retornar um erro no controller
 // routerUsuarios.get('/login', nao sei)
 export default routerUsuarios;

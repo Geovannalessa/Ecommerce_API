@@ -8,30 +8,51 @@ export async function createTable() {
     })
 }
 
-export async function insertProduto(produtos) {
-    return openDb().then(db => {
-        return db.run(
+export async function selectProdutos(req,res) {
+    openDb().then(db => {
+        db.all(
+            'SELECT * FROM Produtos'
+        ).then(produtos=> res.json(produtos))
+    })
+}
+export async function selectProduto(req,res) {
+    let id = req.body.id;
+    openDb().then(db => {
+        db.get('SELECT * FROM Produtos WHERE id=?',[id])
+        .then(produtos=> res.json(produtos))
+    })
+}
+export async function insertProduto(req,res) {
+    let produtos = req.body;
+    openDb().then(db => {
+        db.run(
             'INSERT INTO Produtos (titulo, descricao, valor) VALUES (?,?,?)', [produtos.titulo, produtos.descricao, produtos.valor]
         )
     })
+    res.json({
+        "statuscode": 200
+    })
 }
-export async function updateProduto(produtos) {
-    return openDb().then(db => {
-        return db.run(
+export async function updateProduto(req,res) {
+    let produtos = req.body;
+    openDb().then(db => {
+        db.run(
             'UPDATE Produtos SET titulo=?, descricao=?, valor=? WHERE id=? ', [produtos.titulo, produtos.descricao, produtos.valor, produtos.id]
         )
     })
-}
-export async function selectProdutos(produtos) {
-    return openDb().then(db => {
-        return db.all(
-            'SELECT * FROM Produtos'
-        ).then(res =>res)
+    res.json({
+        "statuscode": 200
     })
 }
-export async function selectProduto(id) {
-    return openDb().then(db => {
-        return db.all('SELECT * FROM Produtos WHERE id=?',[id])
+
+
+export async function deleteProduto(req,res) {
+    let id = req.body.id;
+    openDb().then(db => {
+        db.get('DELETE FROM Produtos WHERE id=?',[id])
         .then(res => res)
+    })
+    res.json({
+        "statuscode": 200
     })
 }
