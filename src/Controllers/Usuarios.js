@@ -57,3 +57,12 @@ export async function deleteUsuario(req, res) {
         "statuscode": 200
     })
 }
+export async function checarSeLogado(req, res) {
+    let email = req.body.email;
+    let senha = req.body.senha;
+    openDb()
+        .then(db => {
+            db.get('SELECT * FROM Usuarios WHERE email=? AND senha=?', [email, senha])
+            .then(usuarios => usuarios?res.json(usuarios):res.json({"Error":"não possui o usuário buscado"}))
+        })
+}

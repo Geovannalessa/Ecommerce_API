@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createTable, insertUsuario,updateUsuario,selectUsuarios,selectUsuario,deleteUsuario } from '../Controllers/Usuarios.js';
+import { createTable, insertUsuario,updateUsuario,selectUsuarios,selectUsuario,deleteUsuario,checarSeLogado } from '../Controllers/Usuarios.js';
 
 const routerUsuarios = Router();
 
@@ -22,4 +22,5 @@ routerUsuarios.put('/usuario', updateUsuario);
 routerUsuarios.delete('/usuario', deleteUsuario);
 // login será onde vai fazer a validação se existe o email e senha e se nao existir retornar um erro no controller
 // routerUsuarios.get('/login', nao sei)
+routerUsuarios.get('/login',checarSeLogado);
 export default routerUsuarios;
