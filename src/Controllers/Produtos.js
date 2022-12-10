@@ -22,3 +22,16 @@ export async function updateProduto(produtos) {
         )
     })
 }
+export async function selectProdutos(produtos) {
+    return openDb().then(db => {
+        return db.all(
+            'SELECT * FROM Produtos'
+        ).then(res =>res)
+    })
+}
+export async function selectProduto(id) {
+    return openDb().then(db => {
+        return db.all('SELECT * FROM Produtos WHERE id=?',[id])
+        .then(res => res)
+    })
+}
