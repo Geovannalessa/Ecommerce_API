@@ -7,7 +7,6 @@ export async function createTable() {
         )
     })
 }
-
 //rotas get checar se é com usuarios ou usuario////selectUsuarios pq essa função irá mostrar todos os usuarios da tabela
 export async function selectUsuarios() {
     return openDb()
@@ -25,8 +24,6 @@ export async function selectUsuario(id) {
                 .then(res => res)
         })
 }
-
-
 //InsertUsuario está no singular porque vai adicionar um Usuario na tabela Usuarios.
 export async function insertUsuario(usuarios) {
     // let usuarios = req.body;
@@ -46,15 +43,11 @@ export async function updateUsuario(usuarios) {
         });
    
 }
-
-export async function deleteUsuario(req, res) {
-    let usuarios = req.body;
-    openDb()
+export async function deleteUsuario(id) {
+    // let id = req.body.id;
+    return openDb()
         .then(db => {
-            db.all('DELETE * FROM Usuarios WHERE id=?', [id])
+            return db.get('DELETE FROM Usuarios WHERE id=?', [id])
                 .then(res => res)
-        });
-    res.json({
-        "statuscode": 200
-    })
+        })
 }

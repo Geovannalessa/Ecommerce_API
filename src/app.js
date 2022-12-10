@@ -3,6 +3,7 @@ import { createTable, insertUsuario,updateUsuario,selectUsuarios,selectUsuario,d
 import express from 'express';
 const app = express();
 app.use(express.json());
+
 //buscar todos os usuarios
 app.get('/usuarios', async function(req, res){
     let usuarios = await selectUsuarios();
@@ -34,7 +35,11 @@ app.put('/usuario', function(req, res){
         })
     }
 })
-
+//deletar um usuario pelo id (cheque na rota de ver todos os usuarios)
+app.delete('/usuario', async function(req, res){
+    let usuario = await deleteUsuario(req.body.id);
+    res.json(usuario);
+})
 // import router from './routers/UsuariosRouters.js';
 // app.use(router);
 
