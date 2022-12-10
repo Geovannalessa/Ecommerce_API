@@ -3,13 +3,16 @@ import { createTable, insertUsuario,updateUsuario,selectUsuarios,selectUsuario,d
 import express from 'express';
 const app = express();
 app.use(express.json());
-
 //buscar todos os usuarios
 app.get('/usuarios', async function(req, res){
     let usuarios = await selectUsuarios();
     res.json(usuarios);
 })
-selectUsuarios
+//buscar um usuario por id
+app.get('/usuario', async function(req, res){
+    let usuario = await selectUsuario(req.body.id);
+    res.json(usuario);
+})
 //adicionar
 app.post('/usuario', function(req,res){
     insertUsuario(req.body)

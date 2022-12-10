@@ -17,12 +17,12 @@ export async function selectUsuarios() {
         })
 }
 //busca por id
-export async function selectUsuario(usuarios) {
-    let id = req.body.id;
-    openDb()
+export async function selectUsuario(id) {
+    // let id = req.body.id;
+    return openDb()
         .then(db => {
-            db.all('SELECT * FROM Usuarios WHERE id=?', [id])
-                .then(usuarios => res)
+            return db.get('SELECT * FROM Usuarios WHERE id=?', [id])
+                .then(res => res)
         })
 }
 
