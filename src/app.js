@@ -10,6 +10,20 @@ app.post('/usuario', function(req,res){
         "statuscode":200
     })
 })
+app.put('/usuario', function(req,res){
+    
+    if(req.body && !req.body.id){
+        res.json({
+            "statuscode":400,
+            "msg": "Você precisa informar um id"
+        })
+    }else{
+        updateUsuario(req.body)
+        res.json({
+            "statuscode":200
+        })
+    }
+})
 // import router from './routers/UsuariosRouters.js';
 // app.use(router);
 

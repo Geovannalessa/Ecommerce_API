@@ -38,16 +38,13 @@ export async function insertUsuario(usuarios) {
     //     "statuscode": 200
     // })
 }
-export async function updateUsuario(req, res) {
-    let usuarios = req.body;
+export async function updateUsuario(usuarios) {
+    // let usuarios = req.body;
     openDb()
         .then(db => {
-            db.exec('UPDATE Usuarios SET nome=?, email=?, senha=? WHERE id=?)', [usuarios.nome, usuarios.idade, usuarios.senha, usuarios.id])
+            db.run('UPDATE Usuarios SET nome=?, email=?, senha=? WHERE id=?', [usuarios.nome, usuarios.email, usuarios.senha, usuarios.id])
         });
-    res.json({
-        "statuscode": 200,
-        "msg":"adicionou um usuario"
-    })
+   
 }
 
 export async function deleteUsuario(req, res) {
