@@ -6,7 +6,7 @@ const routerUsuarios = Router();
 routerUsuarios.get('/',(req,res)=>{
     res.json({
         "statusCode": 200,
-        "msg":"API usuarios rodando (º.º) "
+        "msg":"API rodando (ºuº) "
     })
 
 })

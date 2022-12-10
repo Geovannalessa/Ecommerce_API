@@ -8,21 +8,21 @@ export async function createTable() {
     })
 }
 
-export async function selectProdutos(req,res) {
+export async function selectProdutos(req, res) {
     openDb().then(db => {
         db.all(
             'SELECT * FROM Produtos'
-        ).then(produtos=> res.json(produtos))
+        ).then(produtos => res.json(produtos))
     })
 }
-export async function selectProduto(req,res) {
+export async function selectProduto(req, res) {
     let id = req.body.id;
     openDb().then(db => {
-        db.get('SELECT * FROM Produtos WHERE id=?',[id])
-        .then(produtos=> res.json(produtos))
+        db.get('SELECT * FROM Produtos WHERE id=?', [id])
+            .then(produtos => res.json(produtos))
     })
 }
-export async function insertProduto(req,res) {
+export async function insertProduto(req, res) {
     let produtos = req.body;
     openDb().then(db => {
         db.run(
@@ -33,7 +33,7 @@ export async function insertProduto(req,res) {
         "statuscode": 200
     })
 }
-export async function updateProduto(req,res) {
+export async function updateProduto(req, res) {
     let produtos = req.body;
     openDb().then(db => {
         db.run(
@@ -46,11 +46,11 @@ export async function updateProduto(req,res) {
 }
 
 
-export async function deleteProduto(req,res) {
+export async function deleteProduto(req, res) {
     let id = req.body.id;
     openDb().then(db => {
-        db.get('DELETE FROM Produtos WHERE id=?',[id])
-        .then(res => res)
+        db.get('DELETE FROM Produtos WHERE id=?', [id])
+            .then(res => res)
     })
     res.json({
         "statuscode": 200

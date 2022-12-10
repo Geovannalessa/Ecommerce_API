@@ -3,13 +3,6 @@ import { createTable,insertProduto,updateProduto,selectProdutos,selectProduto,de
 
 const routerProdutos = Router();
 
-routerProdutos.get('/',(req,res)=>{
-    res.json({
-        "statusCode": 200,
-        "msg":"API produtos rodando (ºuº) "
-    })
-
-})
 //buscar todos os usuarios:
 routerProdutos.get('/produtos',selectProdutos);
 //buscar um usuario por id:
