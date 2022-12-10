@@ -9,15 +9,15 @@ export async function createTable() {
 }
 
 //rotas get checar se é com usuarios ou usuario////selectUsuarios pq essa função irá mostrar todos os usuarios da tabela
-export async function selectUsuarios(req, res) {
-    openDb()
+export async function selectUsuarios() {
+    return openDb()
         .then(db => {
-            db.all('SELECT * FROM Usuarios')
-                .then(usuarios => res)
+            return db.all('SELECT * FROM Usuarios')
+                .then(res => res)
         })
 }
 //busca por id
-export async function selectUsuario(req, res) {
+export async function selectUsuario(usuarios) {
     let id = req.body.id;
     openDb()
         .then(db => {
