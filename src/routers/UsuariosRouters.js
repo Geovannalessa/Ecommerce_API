@@ -21,4 +21,5 @@ routerUsuarios.put('/usuario', updateUsuario);
 //deletar um usuario pelo id (cheque na rota de ver todos os usuarios):
 routerUsuarios.delete('/usuario', deleteUsuario);
 
+// routerUsuarios.get('/login', nao sei)
 export default routerUsuarios;
