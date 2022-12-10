@@ -8,46 +8,52 @@ export async function createTable() {
     })
 }
 //rotas get checar se é com usuarios ou usuario////selectUsuarios pq essa função irá mostrar todos os usuarios da tabela
-export async function selectUsuarios() {
-    return openDb()
+export async function selectUsuarios(req, res) {
+    openDb()
         .then(db => {
-            return db.all('SELECT * FROM Usuarios')
-                .then(res => res)
+            db.all('SELECT * FROM Usuarios')
+                .then(usuarios=> res.json(usuarios))
         })
 }
 //busca por id
-export async function selectUsuario(id) {
-    // let id = req.body.id;
-    return openDb()
+export async function selectUsuario(req,res) {
+    let id = req.body.id;
+     openDb()
         .then(db => {
-            return db.get('SELECT * FROM Usuarios WHERE id=?', [id])
-                .then(res => res)
+            db.get('SELECT * FROM Usuarios WHERE id=?', [id])
+                .then(usuarios => res.json(usuarios))
         })
 }
 //InsertUsuario está no singular porque vai adicionar um Usuario na tabela Usuarios.
-export async function insertUsuario(usuarios) {
-    // let usuarios = req.body;
+export async function insertUsuario(req,res) {
+    let usuarios = req.body;
     openDb()
         .then(db => {
             db.run('INSERT INTO Usuarios (nome, email, senha) VALUES (?,?,?)', [usuarios.nome, usuarios.email, usuarios.senha])
         });
-    // res.json({
-    //     "statuscode": 200
-    // })
+    res.json({
+        "statuscode": 200
+    })
 }
-export async function updateUsuario(usuarios) {
-    // let usuarios = req.body;
+export async function updateUsuario(req,res) {
+    let usuarios = req.body;
     openDb()
         .then(db => {
             db.run('UPDATE Usuarios SET nome=?, email=?, senha=? WHERE id=?', [usuarios.nome, usuarios.email, usuarios.senha, usuarios.id])
         });
+        res.json({
+            "statuscode": 200
+        })
    
 }
-export async function deleteUsuario(id) {
-    // let id = req.body.id;
-    return openDb()
+export async function deleteUsuario(req,res) {
+    let id = req.body.id;
+     openDb()
         .then(db => {
-            return db.get('DELETE FROM Usuarios WHERE id=?', [id])
+             db.get('DELETE FROM Usuarios WHERE id=?', [id])
                 .then(res => res)
+        })
+        res.json({
+            "statuscode": 200
         })
 }
