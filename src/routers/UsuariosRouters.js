@@ -4,6 +4,7 @@ import { createTable, insertUsuario,updateUsuario,selectUsuarios,selectUsuario,d
 const routerUsuarios = Router();
 
 routerUsuarios.get('/',(req,res)=>{
+    res.send("uepa")
     res.json({
         "statusCode": 200,
         "msg":"API rodando (ºuº) "
